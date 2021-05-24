@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="Consul" Version="1.6.10.1" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="10.0.4" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.5" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.13" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\UserService\UserService.Application\UserService.Application.csproj" />
+    <ProjectReference Include="..\ProductService.Application\ProductService.Application.csproj" />
+    <ProjectReference Include="..\ProductService.Infrastructure\ProductService.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <UserSecretsId>1a6d3c05-c463-4f74-98f0-5f2a2a3fbad0</UserSecretsId>
+    <NoWin32Manifest>true</NoWin32Manifest>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
+    <DockerfileContext>..\..</DockerfileContext>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,452 @@
+{ 
+	"info": {
+		"_postman_id": "fcafcc50-711c-4371-ad70-e33c71fc1b95",
+		"name": "Fidelity Requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "EndPoints que são abertos(AllowAnonymous)",
+			"item": [
+				{
+					"name": "Usuario",
+					"item": [
+						{
+							"name": "Autenticar usuário",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"teste1@hotmail.com\",\r\n  \"password\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/UserService/Auth/Authenticate",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"UserService",
+										"Auth",
+										"Authenticate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar Usuário",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"teste\",\r\n  \"email\": \"teste@hotmail.com\",\r\n  \"individualTaxpayerRegistration\": \"891.946.900-81\",\r\n  \"cellphone\": \"(71) 981818283\",\r\n  \"birthDate\": \"17/01/1990\",\r\n  \"password\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/UserService/User/Insert",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"UserService",
+										"User",
+										"Insert"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "EndPoints que precisam de autenticação(Authorize)",
+			"item": [
+				{
+					"name": "Usuario",
+					"item": [
+						{
+							"name": "Consultar Saldo do Usuário",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/UserService/User/GetPointsBalance?userId=1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"UserService",
+										"User",
+										"GetPointsBalance"
+									],
+									"query": [
+										{
+											"key": "userId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consultar extrato do Usuário",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/UserService/User/GetExtract?userId=1&initial_date=01/05/2021&final_date=22/12/2021",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"UserService",
+										"User",
+										"GetExtract"
+									],
+									"query": [
+										{
+											"key": "userId",
+											"value": "1"
+										},
+										{
+											"key": "initial_date",
+											"value": "01/05/2021"
+										},
+										{
+											"key": "final_date",
+											"value": "22/12/2021"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar Endereço do Usuário",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"userId\": 1,\r\n  \"number\": 10,\r\n  \"address\": \"Rua teste\",\r\n  \"zip_code\": \"40712-321\",\r\n  \"state\": \"BA\",\r\n  \"city\": \"Cidade\",\r\n  \"district\": \"Barra\",\r\n  \"information_additional\": \"Próximo a padaria teste\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/UserService/User/InsertAddress",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"UserService",
+										"User",
+										"InsertAddress"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Pedido",
+					"item": [
+						{
+							"name": "Listar todos rastreamentos do pedido",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/ProductService/Order/GetOrderTracking?orderId=1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"ProductService",
+										"Order",
+										"GetOrderTracking"
+									],
+									"query": [
+										{
+											"key": "orderId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar um novo pedido",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"userId\": 1,\r\n  \"productId\": 1,\r\n  \"userAddressId\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/ProductService/Order/Insert",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"ProductService",
+										"Order",
+										"Insert"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consultar pedidos do usuário",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/ProductService/Order/GetOrders?userId=3",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"ProductService",
+										"Order",
+										"GetOrders"
+									],
+									"query": [
+										{
+											"key": "userId",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Produto",
+					"item": [
+						{
+							"name": "Listar produtos disponíveis",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/ProductService/Product/FilterProducts?categoryId=&subcategoryId=",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"ProductService",
+										"Product",
+										"FilterProducts"
+									],
+									"query": [
+										{
+											"key": "categoryId",
+											"value": ""
+										},
+										{
+											"key": "subcategoryId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Listar SubCategorias",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/ProductService/Product/FilterSubCategories?categoryId=&description=a",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"ProductService",
+										"Product",
+										"FilterSubCategories"
+									],
+									"query": [
+										{
+											"key": "categoryId",
+											"value": ""
+										},
+										{
+											"key": "description",
+											"value": "a"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Listar Categorias",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/ProductService/Product/FilterCategories?description=",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"ProductService",
+										"Product",
+										"FilterCategories"
+									],
+									"query": [
+										{
+											"key": "description",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:5100"
+		},
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ik1hcmlhIiwicm9sZSI6ImFkbSIsIm5iZiI6MTYyMTgzNDc1MCwiZXhwIjoxNjIxODU2MzUwLCJpYXQiOjE2MjE4MzQ3NTB9.8uuuIwwSByqjvl6n3GYBovVXzn3orYP9vV-iJTLW6uY"
+		}
+	]
+}

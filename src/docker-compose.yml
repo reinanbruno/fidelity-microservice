@@ -1,0 +1,93 @@
+version: '3.4'
+
+networks:
+  gateway:
+    driver: bridge
+
+volumes:
+  datafiles:    
+    
+services:
+  consul:
+    image: consul
+    command: agent -server -ui -node=server-1 -bootstrap-expect=1 -client=0.0.0.0
+    hostname: consul
+    container_name: consul
+    ports:
+      - "8500:8500"
+    restart: always  
+    networks:
+      - gateway  
+      
+  db:
+    image: mysql:latest
+    volumes:
+      - datafiles:/var/lib/mysql      
+      - "../scripts/setup.sql:/docker-entrypoint-initdb.d/1.sql"
+    container_name: db
+    ports:
+      - "3307:3306"
+    networks:
+      - gateway  
+    restart: always  
+    environment:
+      - MYSQL_ROOT_HOST=%
+      - MYSQL_RANDOM_ROOT_PASSWORD=1
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_USER=myuser
+      - MYSQL_PASSWORD=1234
+      - MYSQL_DATABASE=fidelity    
+
+  userservice.api:
+    image: ${DOCKER_REGISTRY-}userserviceapi
+    build:
+      context: .
+      dockerfile: UserService/UserService.Api/Dockerfile
+    container_name: userservice.api
+    ports:
+      - 5101:5101
+    depends_on:
+      - consul
+      - db
+    environment:
+      - TZ=America/Sao_Paulo
+      - DB_CONNECTION_STRING=server=db;port=3306;userid=myuser;password=1234;database=fidelity; 
+    restart: always  
+    networks:
+      - gateway
+
+  productservice.api:
+    image: ${DOCKER_REGISTRY-}productserviceapi
+    build:
+      context: .
+      dockerfile: ProductService/ProductService.Api/Dockerfile
+    container_name: productservice.api
+    ports:
+      - 5102:5102
+    depends_on:
+      - consul
+      - db
+    environment:
+      - TZ=America/Sao_Paulo
+      - DB_CONNECTION_STRING=server=db;port=3306;userid=myuser;password=1234;database=fidelity;
+    restart: always
+    networks:
+      - gateway
+
+  gateway.api:
+    image: ${DOCKER_REGISTRY-}gatewayapi
+    build:
+      context: .
+      dockerfile: Gateway/Gateway.Api/Dockerfile
+    container_name: gateway-app
+    ports:
+      - 5100:5100
+    environment:
+      - TZ=America/Sao_Paulo
+    depends_on:
+      - userservice.api
+      - productservice.api
+    restart: always
+    networks:
+      - gateway
+

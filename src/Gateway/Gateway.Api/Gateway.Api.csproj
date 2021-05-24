@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
+    <UserSecretsId>d0f9f02a-b1dd-411e-8e62-dcc2e4430367</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.5" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.13" />
+    <PackageReference Include="MMLib.SwaggerForOcelot" Version="4.4.1" />
+    <PackageReference Include="Ocelot" Version="17.0.0" />
+    <PackageReference Include="Ocelot.Provider.Consul" Version="17.0.0" />
+    <PackageReference Include="Ocelot.Provider.Polly" Version="17.0.0" />
+  </ItemGroup>
+
+</Project>

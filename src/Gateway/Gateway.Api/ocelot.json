@@ -1,0 +1,73 @@
+﻿{
+  "Routes": [
+    {
+      "UseServiceDiscovery": true,
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "http",
+      "ServiceName": "userservice.api",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "UpstreamPathTemplate": "/api/UserService/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "ReRoutesCaseSensitive": false,
+      "SwaggerKey": "userservice.api",
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 3,
+        "DurationOfBreak": 1000,
+        "TimeoutValue": 5000
+      }
+    },
+    {
+      "UseServiceDiscovery": true,
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "http",
+      "ServiceName": "productservice.api",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "UpstreamPathTemplate": "/api/ProductService/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "ReRoutesCaseSensitive": false,
+      "SwaggerKey": "productservice.api",
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 3,
+        "DurationOfBreak": 1000,
+        "TimeoutValue": 5000
+      }
+    }
+  ],
+  "GlobalConfiguration": {
+    "ServiceDiscoveryProvider": {
+      "Scheme": "http",
+      "Host": "consul",
+      "Port": 8500,
+      "Type": "Consul"
+    }
+  },
+  "SwaggerEndPoints": [
+    {
+      "Key": "userservice.api",
+      "Config": [
+        {
+          "Name": "Api User Service",
+          "Version": "v1",
+          "Url": "http://userservice.api:5101/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "productservice.api",
+      "Config": [
+        {
+          "Name": "Api Product Service",
+          "Version": "v1",
+          "Url": "http://productservice.api:5102/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ],
+  "AllowedHosts": "*"
+}
