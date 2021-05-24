@@ -13,5 +13,6 @@ namespace UserService.Application.Commands.InsertUser
         public Cellphone cellphone { get; set; }
         public DateTime birthDate { get; set; }
         public String password { get; set; }
+        public decimal currentPointsValue { get; set; }
     }
 }

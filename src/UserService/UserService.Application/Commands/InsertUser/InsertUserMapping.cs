@@ -35,7 +35,7 @@ namespace UserService.Application.Commands.InsertUser
                         opt => opt.MapFrom(src => 1))
                     .ForMember(dest =>
                         dest.CurrentPointsBalance,
-                        opt => opt.MapFrom(src => 0));
+                        opt => opt.MapFrom(src => src.currentPointsValue));
         }
     }
 }

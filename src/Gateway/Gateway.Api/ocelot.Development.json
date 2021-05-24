@@ -15,7 +15,7 @@
       "SwaggerKey": "userservice.api",
       "QoSOptions": {
         "ExceptionsAllowedBeforeBreaking": 3,
-        "DurationOfBreak": 1000,
+        "DurationOfBreak": 5000,
         "TimeoutValue": 5000
       }
     },
@@ -34,7 +34,7 @@
       "SwaggerKey": "productservice.api",
       "QoSOptions": {
         "ExceptionsAllowedBeforeBreaking": 3,
-        "DurationOfBreak": 1000,
+        "DurationOfBreak": 5000,
         "TimeoutValue": 5000
       }
     }

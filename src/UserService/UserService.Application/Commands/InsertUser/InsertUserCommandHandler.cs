@@ -8,6 +8,7 @@ using MediatR;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using System;
 
 namespace UserService.Application.Commands.InsertUser
 {
@@ -50,7 +51,18 @@ namespace UserService.Application.Commands.InsertUser
 
             User user = _mapper.Map<InsertUserInputModel, User>(request);
             user.Password = _cryptographyService.Encrypt(user.Password);
+
+            if(request.currentPointsValue > 0)
+            {
+                user.UserPointHistories.Add(new UserPointHistory
+                {
+                    PointBalance = request.currentPointsValue,
+                    RegistrationDate = DateTime.Now
+                });
+            }
+
             await _userRepository.Insert(user);
+
             await _unitOfWork.Commit();
 
             return new CommandResult<int>

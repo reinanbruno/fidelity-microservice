@@ -38,6 +38,10 @@ namespace UserService.Application.Commands.InsertUser
                    .MinimumLength(6)
                    .MaximumLength(100)
                    .WithName("Senha");
+
+            RuleFor(c => c.currentPointsValue)
+                   .GreaterThanOrEqualTo(0)
+                   .WithName("Saldo do usuário");
         }
     }
 }
