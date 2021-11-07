@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Moq;
 using System;
 using System.Threading.Tasks;
@@ -94,7 +94,7 @@ namespace UserService.Test.Commands.User
             var dimensionTravelledResult = await commandHandler.Handle(inputModel, new System.Threading.CancellationToken());
 
             // Assert
-            Assert.True(dimensionTravelledResult.success);
+            Assert.False(dimensionTravelledResult.success);
         }
 
         [Fact]
@@ -132,7 +132,7 @@ namespace UserService.Test.Commands.User
             var dimensionTravelledResult = await commandHandler.Handle(inputModel, new System.Threading.CancellationToken());
 
             // Assert
-            Assert.True(dimensionTravelledResult.success);
+            Assert.False(dimensionTravelledResult.success);
         }
     }
 }
