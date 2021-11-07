@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using System.Threading.Tasks;
 using UserService.Application.Commands.InsertUserAddress;
 using UserService.Core.Interfaces;
@@ -83,7 +83,7 @@ namespace UserService.Test.Commands.UserAddress
             var dimensionTravelledResult = await commandHandler.Handle(inputModel, new System.Threading.CancellationToken());
 
             // Assert
-            Assert.True(dimensionTravelledResult.success);
+            Assert.False(dimensionTravelledResult.success);
         }
     }
 }
