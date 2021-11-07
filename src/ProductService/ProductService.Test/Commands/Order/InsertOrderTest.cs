@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using ProductService.Application.Commands.InsertOrder;
 using ProductService.Core.Interfaces;
 using ProductService.Core.Interfaces.Repositories;
@@ -87,7 +87,7 @@ namespace ProductService.Test.Commands.Order
             var dimensionTravelledResult = await commandHandler.Handle(inputModel, new System.Threading.CancellationToken());
 
             // Assert
-            Assert.True(dimensionTravelledResult.success);
+            Assert.False(dimensionTravelledResult.success);
         }
 
         [Fact]
@@ -120,7 +120,7 @@ namespace ProductService.Test.Commands.Order
             var dimensionTravelledResult = await commandHandler.Handle(inputModel, new System.Threading.CancellationToken());
 
             // Assert
-            Assert.True(dimensionTravelledResult.success);
+            Assert.False(dimensionTravelledResult.success);
         }
 
         [Fact]
@@ -153,7 +153,7 @@ namespace ProductService.Test.Commands.Order
             var dimensionTravelledResult = await commandHandler.Handle(inputModel, new System.Threading.CancellationToken());
 
             // Assert
-            Assert.True(dimensionTravelledResult.success);
+            Assert.False(dimensionTravelledResult.success);
         }
 
         [Fact]
@@ -186,7 +186,7 @@ namespace ProductService.Test.Commands.Order
             var dimensionTravelledResult = await commandHandler.Handle(inputModel, new System.Threading.CancellationToken());
 
             // Assert
-            Assert.True(dimensionTravelledResult.success);
+            Assert.False(dimensionTravelledResult.success);
         }
 
     }
